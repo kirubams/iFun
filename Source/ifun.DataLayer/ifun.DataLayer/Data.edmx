@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="iFunModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="ExpenseID" />
+          </Key>
+          <Property Name="ExpenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Createdby" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Modifiedby" Type="int" />
+        </EntityType>
+        <EntityType Name="ExpenseTransaction">
+          <Key>
+            <PropertyRef Name="ExpenseTransactionID" />
+          </Key>
+          <Property Name="ExpenseTransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpenseID" Type="int" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Createdby" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Modifiedby" Type="int" />
+        </EntityType>
+        <EntityType Name="GamePrice">
+          <Key>
+            <PropertyRef Name="PriceID" />
+          </Key>
+          <Property Name="PriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Game_SystemID" Type="int" />
+          <Property Name="PlayerNo" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Minutes" Type="int" />
+          <Property Name="IndividualPrice" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Createdby" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Modifiedby" Type="int" />
+        </EntityType>
+        <EntityType Name="Gamesystems">
+          <Key>
+            <PropertyRef Name="GameSystemID" />
+          </Key>
+          <Property Name="GameSystemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="ModelNo" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Createdby" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Modifiedby" Type="int" />
+        </EntityType>
+        <EntityType Name="IncomeTransaction">
+          <Key>
+            <PropertyRef Name="IncomeTransactionID" />
+          </Key>
+          <Property Name="IncomeTransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Game_SystemID" Type="int" />
+          <Property Name="NoofPlayers" Type="int" />
+          <Property Name="isIndividual" Type="bit" />
+          <Property Name="isManual" Type="bit" />
+          <Property Name="ManualPrice" Type="int" />
+          <Property Name="ReasonForManualPrice" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Createdby" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Modifiedby" Type="int" />
+          <Property Name="FinalPrice" Type="int" />
+          <Property Name="SystemOrderId" Type="int" />
+        </EntityType>
+        <EntityType Name="NumberOfSystems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemOrderId" Type="int" />
+          <Property Name="Game_SystemID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Createdby" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Modifiedby" Type="int" />
+        </EntityType>
+        <Association Name="fk_expenseID">
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="0..1" />
+          <End Role="ExpenseTransaction" Type="Self.ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="ExpenseID" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="ExpenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_game_Incomesystemid">
+          <End Role="Gamesystems" Type="Self.Gamesystems" Multiplicity="0..1" />
+          <End Role="IncomeTransaction" Type="Self.IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gamesystems">
+              <PropertyRef Name="GameSystemID" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="Game_SystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_game_systemid">
+          <End Role="Gamesystems" Type="Self.Gamesystems" Multiplicity="0..1" />
+          <End Role="NumberOfSystems" Type="Self.NumberOfSystems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gamesystems">
+              <PropertyRef Name="GameSystemID" />
+            </Principal>
+            <Dependent Role="NumberOfSystems">
+              <PropertyRef Name="Game_SystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_gamesystemid">
+          <End Role="Gamesystems" Type="Self.Gamesystems" Multiplicity="0..1" />
+          <End Role="GamePrice" Type="Self.GamePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gamesystems">
+              <PropertyRef Name="GameSystemID" />
+            </Principal>
+            <Dependent Role="GamePrice">
+              <PropertyRef Name="Game_SystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GenerateDailyReport_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GenerateMonthlyReport_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GenerateYearlyReport_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportDate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="iFunModelStoreContainer">
+          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenseTransaction" EntityType="Self.ExpenseTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GamePrice" EntityType="Self.GamePrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gamesystems" EntityType="Self.Gamesystems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncomeTransaction" EntityType="Self.IncomeTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NumberOfSystems" EntityType="Self.NumberOfSystems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_expenseID" Association="Self.fk_expenseID">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_game_Incomesystemid" Association="Self.fk_game_Incomesystemid">
+            <End Role="Gamesystems" EntitySet="Gamesystems" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_game_systemid" Association="Self.fk_game_systemid">
+            <End Role="Gamesystems" EntitySet="Gamesystems" />
+            <End Role="NumberOfSystems" EntitySet="NumberOfSystems" />
+          </AssociationSet>
+          <AssociationSet Name="fk_gamesystemid" Association="Self.fk_gamesystemid">
+            <End Role="Gamesystems" EntitySet="Gamesystems" />
+            <End Role="GamePrice" EntitySet="GamePrice" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="iFunModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Expens">
+          <Key>
+            <PropertyRef Name="ExpenseID" />
+          </Key>
+          <Property Name="ExpenseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifiedby" Type="Int32" />
+          <NavigationProperty Name="ExpenseTransactions" Relationship="Self.fk_expenseID" FromRole="Expenses" ToRole="ExpenseTransaction" />
+        </EntityType>
+        <EntityType Name="ExpenseTransaction">
+          <Key>
+            <PropertyRef Name="ExpenseTransactionID" />
+          </Key>
+          <Property Name="ExpenseTransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpenseID" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifiedby" Type="Int32" />
+          <NavigationProperty Name="Expens" Relationship="Self.fk_expenseID" FromRole="ExpenseTransaction" ToRole="Expenses" />
+        </EntityType>
+        <EntityType Name="GamePrice">
+          <Key>
+            <PropertyRef Name="PriceID" />
+          </Key>
+          <Property Name="PriceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Game_SystemID" Type="Int32" />
+          <Property Name="PlayerNo" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Minutes" Type="Int32" />
+          <Property Name="IndividualPrice" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifiedby" Type="Int32" />
+          <NavigationProperty Name="Gamesystem" Relationship="Self.fk_gamesystemid" FromRole="GamePrice" ToRole="Gamesystems" />
+        </EntityType>
+        <EntityType Name="Gamesystem">
+          <Key>
+            <PropertyRef Name="GameSystemID" />
+          </Key>
+          <Property Name="GameSystemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ModelNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifiedby" Type="Int32" />
+          <NavigationProperty Name="GamePrices" Relationship="Self.fk_gamesystemid" FromRole="Gamesystems" ToRole="GamePrice" />
+          <NavigationProperty Name="IncomeTransactions" Relationship="Self.fk_game_Incomesystemid" FromRole="Gamesystems" ToRole="IncomeTransaction" />
+          <NavigationProperty Name="NumberOfSystems" Relationship="Self.fk_game_systemid" FromRole="Gamesystems" ToRole="NumberOfSystems" />
+        </EntityType>
+        <EntityType Name="IncomeTransaction">
+          <Key>
+            <PropertyRef Name="IncomeTransactionID" />
+          </Key>
+          <Property Name="IncomeTransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Game_SystemID" Type="Int32" />
+          <Property Name="NoofPlayers" Type="Int32" />
+          <Property Name="isIndividual" Type="Boolean" />
+          <Property Name="isManual" Type="Boolean" />
+          <Property Name="ManualPrice" Type="Int32" />
+          <Property Name="ReasonForManualPrice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifiedby" Type="Int32" />
+          <NavigationProperty Name="Gamesystem" Relationship="Self.fk_game_Incomesystemid" FromRole="IncomeTransaction" ToRole="Gamesystems" />
+          <Property Name="FinalPrice" Type="Int32" />
+          <Property Name="SystemOrderId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="NumberOfSystem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemOrderId" Type="Int32" />
+          <Property Name="Game_SystemID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifiedby" Type="Int32" />
+          <NavigationProperty Name="Gamesystem" Relationship="Self.fk_game_systemid" FromRole="NumberOfSystems" ToRole="Gamesystems" />
+        </EntityType>
+        <Association Name="fk_expenseID">
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="0..1" />
+          <End Role="ExpenseTransaction" Type="Self.ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="ExpenseID" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="ExpenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_gamesystemid">
+          <End Role="Gamesystems" Type="Self.Gamesystem" Multiplicity="0..1" />
+          <End Role="GamePrice" Type="Self.GamePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gamesystems">
+              <PropertyRef Name="GameSystemID" />
+            </Principal>
+            <Dependent Role="GamePrice">
+              <PropertyRef Name="Game_SystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_game_Incomesystemid">
+          <End Role="Gamesystems" Type="Self.Gamesystem" Multiplicity="0..1" />
+          <End Role="IncomeTransaction" Type="Self.IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gamesystems">
+              <PropertyRef Name="GameSystemID" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="Game_SystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_game_systemid">
+          <End Role="Gamesystems" Type="Self.Gamesystem" Multiplicity="0..1" />
+          <End Role="NumberOfSystems" Type="Self.NumberOfSystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gamesystems">
+              <PropertyRef Name="GameSystemID" />
+            </Principal>
+            <Dependent Role="NumberOfSystems">
+              <PropertyRef Name="Game_SystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="iFunEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Expenses" EntityType="Self.Expens" />
+          <EntitySet Name="ExpenseTransactions" EntityType="Self.ExpenseTransaction" />
+          <EntitySet Name="GamePrices" EntityType="Self.GamePrice" />
+          <EntitySet Name="Gamesystems" EntityType="Self.Gamesystem" />
+          <EntitySet Name="IncomeTransactions" EntityType="Self.IncomeTransaction" />
+          <EntitySet Name="NumberOfSystems" EntityType="Self.NumberOfSystem" />
+          <AssociationSet Name="fk_expenseID" Association="Self.fk_expenseID">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_gamesystemid" Association="Self.fk_gamesystemid">
+            <End Role="Gamesystems" EntitySet="Gamesystems" />
+            <End Role="GamePrice" EntitySet="GamePrices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_game_Incomesystemid" Association="Self.fk_game_Incomesystemid">
+            <End Role="Gamesystems" EntitySet="Gamesystems" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_game_systemid" Association="Self.fk_game_systemid">
+            <End Role="Gamesystems" EntitySet="Gamesystems" />
+            <End Role="NumberOfSystems" EntitySet="NumberOfSystems" />
+          </AssociationSet>
+          <FunctionImport Name="GenerateDailyReport_SP" ReturnType="Collection(iFunModel.GenerateDailyReport_SP_Result)">
+            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateMonthlyReport_SP" ReturnType="Collection(iFunModel.GenerateMonthlyReport_SP_Result)">
+            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateYearlyReport_SP" ReturnType="Collection(iFunModel.GenerateYearlyReport_SP_Result)">
+            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GenerateDailyReport_SP_Result">
+          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
+          <Property Type="Boolean" Name="isManual" Nullable="true" />
+          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
+          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
+          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GenerateMonthlyReport_SP_Result">
+          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
+          <Property Type="Boolean" Name="isManual" Nullable="true" />
+          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
+          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
+          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GenerateYearlyReport_SP_Result">
+          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
+          <Property Type="Boolean" Name="isManual" Nullable="true" />
+          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
+          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
+          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="iFunModelStoreContainer" CdmEntityContainer="iFunEntities">
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="iFunModel.Expens">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenseTransactions">
+            <EntityTypeMapping TypeName="iFunModel.ExpenseTransaction">
+              <MappingFragment StoreEntitySet="ExpenseTransaction">
+                <ScalarProperty Name="ExpenseTransactionID" ColumnName="ExpenseTransactionID" />
+                <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GamePrices">
+            <EntityTypeMapping TypeName="iFunModel.GamePrice">
+              <MappingFragment StoreEntitySet="GamePrice">
+                <ScalarProperty Name="PriceID" ColumnName="PriceID" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="PlayerNo" ColumnName="PlayerNo" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+                <ScalarProperty Name="IndividualPrice" ColumnName="IndividualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gamesystems">
+            <EntityTypeMapping TypeName="iFunModel.Gamesystem">
+              <MappingFragment StoreEntitySet="Gamesystems">
+                <ScalarProperty Name="GameSystemID" ColumnName="GameSystemID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncomeTransactions">
+            <EntityTypeMapping TypeName="iFunModel.IncomeTransaction">
+              <MappingFragment StoreEntitySet="IncomeTransaction">
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="IncomeTransactionID" ColumnName="IncomeTransactionID" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
+                <ScalarProperty Name="isIndividual" ColumnName="isIndividual" />
+                <ScalarProperty Name="isManual" ColumnName="isManual" />
+                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
+                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NumberOfSystems">
+            <EntityTypeMapping TypeName="iFunModel.NumberOfSystem">
+              <MappingFragment StoreEntitySet="NumberOfSystems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerateDailyReport_SP" FunctionName="iFunModel.Store.GenerateDailyReport_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GenerateDailyReport_SP_Result">
+                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
+                <ScalarProperty Name="isManual" ColumnName="isManual" />
+                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
+                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateMonthlyReport_SP" FunctionName="iFunModel.Store.GenerateMonthlyReport_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GenerateMonthlyReport_SP_Result">
+                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
+                <ScalarProperty Name="isManual" ColumnName="isManual" />
+                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
+                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateYearlyReport_SP" FunctionName="iFunModel.Store.GenerateYearlyReport_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GenerateYearlyReport_SP_Result">
+                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
+                <ScalarProperty Name="isManual" ColumnName="isManual" />
+                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
+                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

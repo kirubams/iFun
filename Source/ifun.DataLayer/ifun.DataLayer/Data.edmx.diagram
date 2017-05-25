@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b14381a661e4939baf27ad1935d859a" Name="Diagram1">
+        <EntityTypeShape EntityType="iFunModel.Expens" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="iFunModel.ExpenseTransaction" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="iFunModel.GamePrice" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="iFunModel.Gamesystem" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="iFunModel.IncomeTransaction" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iFunModel.NumberOfSystem" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="iFunModel.fk_expenseID" ManuallyRouted="false" />
+        <AssociationConnector Association="iFunModel.fk_gamesystemid" ManuallyRouted="false" />
+        <AssociationConnector Association="iFunModel.fk_game_Incomesystemid" ManuallyRouted="false" />
+        <AssociationConnector Association="iFunModel.fk_game_systemid" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

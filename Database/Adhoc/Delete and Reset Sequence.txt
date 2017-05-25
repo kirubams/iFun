@@ -1,0 +1,12 @@
+Delete from [dbo].[IncomeTransaction]
+DBCC CHECKIDENT ('[IncomeTransaction]', RESEED, 0);
+Delete from dbo.GamePrice
+DBCC CHECKIDENT ('[GamePrice]', RESEED, 0);
+Delete from dbo.ExpenseTransaction
+DBCC CHECKIDENT ('[ExpenseTransaction]', RESEED, 0);
+Delete from dbo.NumberOfSystems
+DBCC CHECKIDENT ('[NumberOfSystems]', RESEED, 0);
+Delete from dbo.Expenses
+DBCC CHECKIDENT ('[Expenses]', RESEED, 0);
+Delete from dbo.Gamesystems
+DBCC CHECKIDENT ('[Gamesystems]', RESEED, 0);
