@@ -10,6 +10,7 @@ namespace iFun.BusinessLayer
 {
     public class GetReportBL
     {
+        ///////
         //public List<IncomeTransactionDTO> GetDailyIncomeReport(DateTime ReportDate)
         //{
         //    try
