@@ -49,6 +49,13 @@ namespace iFunGameStation
             frm.Show();
         }
 
+
+        private void generateReportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reports frm = new Reports();
+            frm.Show();
+        }
+
         private void btn1_Click(object sender, EventArgs e)
         {
             if (ddlPlayerNo1.SelectedIndex != -1 || ddlMinutes1.SelectedIndex != -1)
@@ -939,9 +946,6 @@ namespace iFunGameStation
 
 
         }
-
-
-
 
     }
 

@@ -14,5 +14,6 @@ namespace iFun.DTO
         public int Amount { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }
+        public string ExpenseDescription { get; set; }
     }
 }

@@ -144,6 +144,15 @@
         <Function Name="GenerateYearlyReport_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ReportDate" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="GetDailyExpenseTransaction_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetMonthlyExpenseTransaction_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetYearlyExpenseTransaction_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportDate" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="iFunModelStoreContainer">
           <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExpenseTransaction" EntityType="Self.ExpenseTransaction" Schema="dbo" store:Type="Tables" />
@@ -334,12 +343,21 @@
             <End Role="NumberOfSystems" EntitySet="NumberOfSystems" />
           </AssociationSet>
           <FunctionImport Name="GenerateDailyReport_SP" ReturnType="Collection(iFunModel.GenerateDailyReport_SP_Result)">
-            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GenerateMonthlyReport_SP" ReturnType="Collection(iFunModel.GenerateMonthlyReport_SP_Result)">
-            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GenerateYearlyReport_SP" ReturnType="Collection(iFunModel.GenerateYearlyReport_SP_Result)">
+          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetDailyExpenseTransaction_SP" ReturnType="Collection(iFunModel.GetDailyExpenseTransaction_SP_Result)">
+            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetMonthlyExpenseTransaction_SP" ReturnType="Collection(iFunModel.GetMonthlyExpenseTransaction_SP_Result)">
+            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetYearlyExpenseTransaction_SP" ReturnType="Collection(iFunModel.GetYearlyExpenseTransaction_SP_Result)">
             <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
@@ -375,6 +393,33 @@
           <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
           <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetDailyExpenseTransaction_SP_Result">
+          <Property Type="Int32" Name="ExpenseTransactionID" Nullable="false" />
+          <Property Type="Int32" Name="ExpenseID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Createdby" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetMonthlyExpenseTransaction_SP_Result">
+          <Property Type="Int32" Name="ExpenseTransactionID" Nullable="false" />
+          <Property Type="Int32" Name="ExpenseID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Createdby" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetYearlyExpenseTransaction_SP_Result">
+          <Property Type="Int32" Name="ExpenseTransactionID" Nullable="false" />
+          <Property Type="Int32" Name="ExpenseID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Createdby" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -512,6 +557,45 @@
                 <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDailyExpenseTransaction_SP" FunctionName="iFunModel.Store.GetDailyExpenseTransaction_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GetDailyExpenseTransaction_SP_Result">
+                <ScalarProperty Name="ExpenseTransactionID" ColumnName="ExpenseTransactionID" />
+                <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMonthlyExpenseTransaction_SP" FunctionName="iFunModel.Store.GetMonthlyExpenseTransaction_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GetMonthlyExpenseTransaction_SP_Result">
+                <ScalarProperty Name="ExpenseTransactionID" ColumnName="ExpenseTransactionID" />
+                <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetYearlyExpenseTransaction_SP" FunctionName="iFunModel.Store.GetYearlyExpenseTransaction_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GetYearlyExpenseTransaction_SP_Result">
+                <ScalarProperty Name="ExpenseTransactionID" ColumnName="ExpenseTransactionID" />
+                <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

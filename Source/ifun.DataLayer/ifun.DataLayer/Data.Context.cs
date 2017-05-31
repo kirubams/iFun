@@ -60,5 +60,32 @@ namespace ifun.DataLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateYearlyReport_SP_Result>("GenerateYearlyReport_SP", reportDateParameter);
         }
+    
+        public virtual ObjectResult<GetDailyExpenseTransaction_SP_Result> GetDailyExpenseTransaction_SP(Nullable<System.DateTime> reportDate)
+        {
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("ReportDate", reportDate) :
+                new ObjectParameter("ReportDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDailyExpenseTransaction_SP_Result>("GetDailyExpenseTransaction_SP", reportDateParameter);
+        }
+    
+        public virtual ObjectResult<GetMonthlyExpenseTransaction_SP_Result> GetMonthlyExpenseTransaction_SP(Nullable<System.DateTime> reportDate)
+        {
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("ReportDate", reportDate) :
+                new ObjectParameter("ReportDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMonthlyExpenseTransaction_SP_Result>("GetMonthlyExpenseTransaction_SP", reportDateParameter);
+        }
+    
+        public virtual ObjectResult<GetYearlyExpenseTransaction_SP_Result> GetYearlyExpenseTransaction_SP(Nullable<System.DateTime> reportDate)
+        {
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("ReportDate", reportDate) :
+                new ObjectParameter("ReportDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetYearlyExpenseTransaction_SP_Result>("GetYearlyExpenseTransaction_SP", reportDateParameter);
+        }
     }
 }

@@ -86,6 +86,15 @@
     <Compile Include="GenerateYearlyReport_SP_Result.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetDailyExpenseTransaction_SP_Result.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetMonthlyExpenseTransaction_SP_Result.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetYearlyExpenseTransaction_SP_Result.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="IncomeTransaction.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>

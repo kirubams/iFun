@@ -38,6 +38,7 @@
             this.dailyTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyExpensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ddlMinutes1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -206,7 +207,6 @@
             this.ddlPlayerNo5 = new System.Windows.Forms.ComboBox();
             this.label48 = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.generateReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlManual1.SuspendLayout();
@@ -324,6 +324,13 @@
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
             this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // generateReportsToolStripMenuItem
+            // 
+            this.generateReportsToolStripMenuItem.Name = "generateReportsToolStripMenuItem";
+            this.generateReportsToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            this.generateReportsToolStripMenuItem.Text = "Generate Reports";
+            this.generateReportsToolStripMenuItem.Click += new System.EventHandler(this.generateReportsToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -2258,12 +2265,6 @@
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox8.TabIndex = 0;
             this.pictureBox8.TabStop = false;
-            // 
-            // generateReportsToolStripMenuItem
-            // 
-            this.generateReportsToolStripMenuItem.Name = "generateReportsToolStripMenuItem";
-            this.generateReportsToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-            this.generateReportsToolStripMenuItem.Text = "Generate Reports";
             // 
             // MainForm
             // 
