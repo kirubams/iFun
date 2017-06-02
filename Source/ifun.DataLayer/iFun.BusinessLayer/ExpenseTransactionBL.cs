@@ -29,22 +29,57 @@ namespace iFun.BusinessLayer
             return lstExpenseTransaction;
         }
 
-        public List<ExpenseTransactionDTO> GetDailyExpenseTransaction(DateTime reportDate)
+        public List<ExpenseTransactionDTO> GetExpenseTransaction(DateTime reportDate, string mode)
         {
             var lstExpenseTransaction = new List<ExpenseTransactionDTO>();
             using (var entities = new iFunEntities())
             {
-                var results = entities.GetDailyExpenseTransaction_SP(reportDate);
-                foreach (var ent in results)
+                if (mode == "DAILY")
                 {
-                    var expenseTransactionDTO = new ExpenseTransactionDTO();
-                    expenseTransactionDTO.ExpenseTransactionID = ent.ExpenseTransactionID;
-                    expenseTransactionDTO.ExpenseID = ent.ExpenseID ?? 0;
-                    expenseTransactionDTO.Comments = ent.Comments;
-                    expenseTransactionDTO.Amount = ent.Amount ?? 0;
-                    expenseTransactionDTO.ExpenseDescription = ent.Description;
-                    expenseTransactionDTO.CreatedDate = ent.CreatedDate ?? DateTime.Now;
-                    lstExpenseTransaction.Add(expenseTransactionDTO);
+                    var results = entities.GetDailyExpenseTransaction_SP(reportDate);
+                    foreach (var ent in results)
+                    {
+                        var expenseTransactionDTO = new ExpenseTransactionDTO();
+                        expenseTransactionDTO.ExpenseTransactionID = ent.ExpenseTransactionID;
+                        expenseTransactionDTO.ExpenseID = ent.ExpenseID ?? 0;
+                        expenseTransactionDTO.Comments = ent.Comments;
+                        expenseTransactionDTO.Amount = ent.Amount ?? 0;
+                        expenseTransactionDTO.ExpenseDescription = ent.Description;
+                        expenseTransactionDTO.CreatedDate = ent.CreatedDate ?? DateTime.Now;
+                        lstExpenseTransaction.Add(expenseTransactionDTO);
+                    }
+                }
+                else if(mode == "MONTHLY")
+                {
+                    var results = entities.GetMonthlyExpenseTransaction_SP(reportDate);
+                    foreach (var ent in results)
+                    {
+                        var expenseTransactionDTO = new ExpenseTransactionDTO();
+                        expenseTransactionDTO.ExpenseTransactionID = ent.ExpenseTransactionID;
+                        expenseTransactionDTO.ExpenseID = ent.ExpenseID ?? 0;
+                        expenseTransactionDTO.Comments = ent.Comments;
+                        expenseTransactionDTO.Amount = ent.Amount ?? 0;
+                        expenseTransactionDTO.ExpenseDescription = ent.Description;
+                        expenseTransactionDTO.CreatedDate = ent.CreatedDate ?? DateTime.Now;
+                        lstExpenseTransaction.Add(expenseTransactionDTO);
+                    }
+
+                }
+                else if(mode == "YEARLY")
+                {
+                    var results = entities.GetYearlyExpenseTransaction_SP(reportDate);
+                    foreach (var ent in results)
+                    {
+                        var expenseTransactionDTO = new ExpenseTransactionDTO();
+                        expenseTransactionDTO.ExpenseTransactionID = ent.ExpenseTransactionID;
+                        expenseTransactionDTO.ExpenseID = ent.ExpenseID ?? 0;
+                        expenseTransactionDTO.Comments = ent.Comments;
+                        expenseTransactionDTO.Amount = ent.Amount ?? 0;
+                        expenseTransactionDTO.ExpenseDescription = ent.Description;
+                        expenseTransactionDTO.CreatedDate = ent.CreatedDate ?? DateTime.Now;
+                        lstExpenseTransaction.Add(expenseTransactionDTO);
+                    }
+
                 }
             }
 

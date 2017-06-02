@@ -34,31 +34,13 @@ namespace ifun.DataLayer
         public virtual DbSet<IncomeTransaction> IncomeTransactions { get; set; }
         public virtual DbSet<NumberOfSystem> NumberOfSystems { get; set; }
     
-        public virtual ObjectResult<GenerateDailyReport_SP_Result> GenerateDailyReport_SP(Nullable<System.DateTime> reportDate)
+        public virtual int GenerateDailyReport_SP(Nullable<System.DateTime> reportDate)
         {
             var reportDateParameter = reportDate.HasValue ?
                 new ObjectParameter("ReportDate", reportDate) :
                 new ObjectParameter("ReportDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateDailyReport_SP_Result>("GenerateDailyReport_SP", reportDateParameter);
-        }
-    
-        public virtual ObjectResult<GenerateMonthlyReport_SP_Result> GenerateMonthlyReport_SP(Nullable<System.DateTime> reportDate)
-        {
-            var reportDateParameter = reportDate.HasValue ?
-                new ObjectParameter("ReportDate", reportDate) :
-                new ObjectParameter("ReportDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateMonthlyReport_SP_Result>("GenerateMonthlyReport_SP", reportDateParameter);
-        }
-    
-        public virtual ObjectResult<GenerateYearlyReport_SP_Result> GenerateYearlyReport_SP(Nullable<System.DateTime> reportDate)
-        {
-            var reportDateParameter = reportDate.HasValue ?
-                new ObjectParameter("ReportDate", reportDate) :
-                new ObjectParameter("ReportDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateYearlyReport_SP_Result>("GenerateYearlyReport_SP", reportDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerateDailyReport_SP", reportDateParameter);
         }
     
         public virtual ObjectResult<GetDailyExpenseTransaction_SP_Result> GetDailyExpenseTransaction_SP(Nullable<System.DateTime> reportDate)
@@ -86,6 +68,33 @@ namespace ifun.DataLayer
                 new ObjectParameter("ReportDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetYearlyExpenseTransaction_SP_Result>("GetYearlyExpenseTransaction_SP", reportDateParameter);
+        }
+    
+        public virtual ObjectResult<GenerateDailyReport_SP1_Result> GenerateDailyReport_SP1(Nullable<System.DateTime> reportDate)
+        {
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("ReportDate", reportDate) :
+                new ObjectParameter("ReportDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateDailyReport_SP1_Result>("GenerateDailyReport_SP1", reportDateParameter);
+        }
+    
+        public virtual ObjectResult<GenerateMonthlyReport_SP_Result> GenerateMonthlyReport_SP(Nullable<System.DateTime> reportDate)
+        {
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("ReportDate", reportDate) :
+                new ObjectParameter("ReportDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateMonthlyReport_SP_Result>("GenerateMonthlyReport_SP", reportDateParameter);
+        }
+    
+        public virtual ObjectResult<GenerateYearlyReport_SP_Result> GenerateYearlyReport_SP(Nullable<System.DateTime> reportDate)
+        {
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("ReportDate", reportDate) :
+                new ObjectParameter("ReportDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateYearlyReport_SP_Result>("GenerateYearlyReport_SP", reportDateParameter);
         }
     }
 }

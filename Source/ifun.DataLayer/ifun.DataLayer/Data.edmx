@@ -74,6 +74,7 @@
           <Property Name="Modifiedby" Type="int" />
           <Property Name="FinalPrice" Type="int" />
           <Property Name="SystemOrderId" Type="int" />
+          <Property Name="Minutes" Type="int" />
         </EntityType>
         <EntityType Name="NumberOfSystems">
           <Key>
@@ -257,6 +258,7 @@
           <NavigationProperty Name="Gamesystem" Relationship="Self.fk_game_Incomesystemid" FromRole="IncomeTransaction" ToRole="Gamesystems" />
           <Property Name="FinalPrice" Type="Int32" />
           <Property Name="SystemOrderId" Type="Int32" />
+          <Property Name="Minutes" Type="Int32" />
         </EntityType>
         <EntityType Name="NumberOfSystem">
           <Key>
@@ -342,58 +344,28 @@
             <End Role="Gamesystems" EntitySet="Gamesystems" />
             <End Role="NumberOfSystems" EntitySet="NumberOfSystems" />
           </AssociationSet>
-          <FunctionImport Name="GenerateDailyReport_SP" ReturnType="Collection(iFunModel.GenerateDailyReport_SP_Result)">
-          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="GenerateMonthlyReport_SP" ReturnType="Collection(iFunModel.GenerateMonthlyReport_SP_Result)">
-          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="GenerateYearlyReport_SP" ReturnType="Collection(iFunModel.GenerateYearlyReport_SP_Result)">
+          <FunctionImport Name="GenerateDailyReport_SP">
           <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetDailyExpenseTransaction_SP" ReturnType="Collection(iFunModel.GetDailyExpenseTransaction_SP_Result)">
-            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetMonthlyExpenseTransaction_SP" ReturnType="Collection(iFunModel.GetMonthlyExpenseTransaction_SP_Result)">
-            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetYearlyExpenseTransaction_SP" ReturnType="Collection(iFunModel.GetYearlyExpenseTransaction_SP_Result)">
+          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateDailyReport_SP1" ReturnType="Collection(iFunModel.GenerateDailyReport_SP1_Result)">
+          <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateMonthlyReport_SP" ReturnType="Collection(iFunModel.GenerateMonthlyReport_SP_Result)">
+            <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateYearlyReport_SP" ReturnType="Collection(iFunModel.GenerateYearlyReport_SP_Result)">
             <Parameter Name="ReportDate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="GenerateDailyReport_SP_Result">
-          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
-          <Property Type="Boolean" Name="isManual" Nullable="true" />
-          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
-          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
-          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GenerateMonthlyReport_SP_Result">
-          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
-          <Property Type="Boolean" Name="isManual" Nullable="true" />
-          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
-          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
-          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GenerateYearlyReport_SP_Result">
-          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
-          <Property Type="Boolean" Name="isManual" Nullable="true" />
-          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
-          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
-          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="GetDailyExpenseTransaction_SP_Result">
           <Property Type="Int32" Name="ExpenseTransactionID" Nullable="false" />
           <Property Type="Int32" Name="ExpenseID" Nullable="true" />
@@ -420,6 +392,42 @@
           <Property Type="Int32" Name="Amount" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="Createdby" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GenerateDailyReport_SP1_Result">
+          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
+          <Property Type="Boolean" Name="isManual" Nullable="true" />
+          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
+          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
+          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
+          <Property Type="Int32" Name="Minutes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GenerateMonthlyReport_SP_Result">
+          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
+          <Property Type="Boolean" Name="isManual" Nullable="true" />
+          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
+          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
+          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
+          <Property Type="Int32" Name="Minutes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GenerateYearlyReport_SP_Result">
+          <Property Type="Int32" Name="NoofPlayers" Nullable="true" />
+          <Property Type="Boolean" Name="isManual" Nullable="true" />
+          <Property Type="Int32" Name="ManualPrice" Nullable="true" />
+          <Property Type="String" Name="ReasonForManualPrice" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="FinalPrice" Nullable="true" />
+          <Property Type="Int32" Name="Game_SystemID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SystemOrderId" Nullable="true" />
+          <Property Type="Int32" Name="Minutes" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -486,6 +494,7 @@
           <EntitySetMapping Name="IncomeTransactions">
             <EntityTypeMapping TypeName="iFunModel.IncomeTransaction">
               <MappingFragment StoreEntitySet="IncomeTransaction">
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
                 <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
                 <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
                 <ScalarProperty Name="IncomeTransactionID" ColumnName="IncomeTransactionID" />
@@ -515,51 +524,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GenerateDailyReport_SP" FunctionName="iFunModel.Store.GenerateDailyReport_SP">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="iFunModel.GenerateDailyReport_SP_Result">
-                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
-                <ScalarProperty Name="isManual" ColumnName="isManual" />
-                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
-                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
-                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GenerateMonthlyReport_SP" FunctionName="iFunModel.Store.GenerateMonthlyReport_SP">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="iFunModel.GenerateMonthlyReport_SP_Result">
-                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
-                <ScalarProperty Name="isManual" ColumnName="isManual" />
-                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
-                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
-                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GenerateYearlyReport_SP" FunctionName="iFunModel.Store.GenerateYearlyReport_SP">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="iFunModel.GenerateYearlyReport_SP_Result">
-                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
-                <ScalarProperty Name="isManual" ColumnName="isManual" />
-                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
-                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
-                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetDailyExpenseTransaction_SP" FunctionName="iFunModel.Store.GetDailyExpenseTransaction_SP">
             <ResultMapping>
               <ComplexTypeMapping TypeName="iFunModel.GetDailyExpenseTransaction_SP_Result">
@@ -596,6 +560,54 @@
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateDailyReport_SP1" FunctionName="iFunModel.Store.GenerateDailyReport_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GenerateDailyReport_SP1_Result">
+                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
+                <ScalarProperty Name="isManual" ColumnName="isManual" />
+                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
+                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateMonthlyReport_SP" FunctionName="iFunModel.Store.GenerateMonthlyReport_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GenerateMonthlyReport_SP_Result">
+                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
+                <ScalarProperty Name="isManual" ColumnName="isManual" />
+                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
+                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenerateYearlyReport_SP" FunctionName="iFunModel.Store.GenerateYearlyReport_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iFunModel.GenerateYearlyReport_SP_Result">
+                <ScalarProperty Name="NoofPlayers" ColumnName="NoofPlayers" />
+                <ScalarProperty Name="isManual" ColumnName="isManual" />
+                <ScalarProperty Name="ManualPrice" ColumnName="ManualPrice" />
+                <ScalarProperty Name="ReasonForManualPrice" ColumnName="ReasonForManualPrice" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Game_SystemID" ColumnName="Game_SystemID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SystemOrderId" ColumnName="SystemOrderId" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

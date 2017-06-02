@@ -77,7 +77,7 @@
     <Compile Include="Gamesystem.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
-    <Compile Include="GenerateDailyReport_SP_Result.cs">
+    <Compile Include="GenerateDailyReport_SP1_Result.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="GenerateMonthlyReport_SP_Result.cs">

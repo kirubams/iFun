@@ -1,0 +1,9 @@
+ExpenseTransactionID,ExpenseID,Comments,Amount,CreatedDate,CreatedBy,ExpenseDescription
+1,1,May month rent,7500,5/24/2017 11:12:07 PM,0,Rent
+2,2,May Month electricity bill,2500,5/24/2017 11:12:41 PM,0,Electricity
+3,3,Salary for employee,4500,5/24/2017 11:12:53 PM,0,Salary
+4,5,Coffee ,200,5/24/2017 11:13:07 PM,0,Other
+5,5,Cool drinks expenditure,350,5/24/2017 11:13:21 PM,0,Other
+6,5,Coffee,200,5/30/2017 10:48:03 PM,0,Other
+7,2,dfdsf,120,5/30/2017 10:48:12 PM,0,Electricity
+8,3,salary to raj,5500,5/30/2017 10:48:22 PM,0,Salary

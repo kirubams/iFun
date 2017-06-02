@@ -11,7 +11,7 @@ namespace ifun.DataLayer
 {
     using System;
     
-    public partial class GenerateDailyReport_SP_Result
+    public partial class GenerateDailyReport_SP1_Result
     {
         public Nullable<int> NoofPlayers { get; set; }
         public Nullable<bool> isManual { get; set; }
@@ -22,5 +22,6 @@ namespace ifun.DataLayer
         public Nullable<int> Game_SystemID { get; set; }
         public string Description { get; set; }
         public Nullable<int> SystemOrderId { get; set; }
+        public Nullable<int> Minutes { get; set; }
     }
 }

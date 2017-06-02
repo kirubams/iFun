@@ -22,5 +22,6 @@ namespace ifun.DataLayer
         public Nullable<int> Game_SystemID { get; set; }
         public string Description { get; set; }
         public Nullable<int> SystemOrderId { get; set; }
+        public Nullable<int> Minutes { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace ifun.DataLayer
         public Nullable<int> Modifiedby { get; set; }
         public Nullable<int> FinalPrice { get; set; }
         public Nullable<int> SystemOrderId { get; set; }
+        public Nullable<int> Minutes { get; set; }
     
         public virtual Gamesystem Gamesystem { get; set; }
     }

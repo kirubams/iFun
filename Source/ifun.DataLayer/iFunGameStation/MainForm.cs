@@ -80,7 +80,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice1.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -107,7 +107,7 @@ namespace iFunGameStation
                     lblPrice1.Text = txtPrice1.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(1);//Gaem System Id - 1
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice1.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice1.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");
@@ -144,7 +144,7 @@ namespace iFunGameStation
             return incomeTranBl.GetPrice(incomeDTO);
         }
 
-        private bool SavePrice(int GameSystemID, int NoofPlayers, bool isIndividual, bool isManual, int manualPrice, string comments, int FinalPrice , int systemOrderId)
+        private bool SavePrice(int GameSystemID, int NoofPlayers, bool isIndividual, bool isManual, int manualPrice, string comments, int FinalPrice , int systemOrderId, int minutes)
         {
             IncomeTransactionDTO incomeDTO = new IncomeTransactionDTO();
             incomeDTO.Game_SystemID = GameSystemID;
@@ -155,6 +155,7 @@ namespace iFunGameStation
             incomeDTO.Comments = comments;
             incomeDTO.FinalPrice = FinalPrice;
             incomeDTO.SystemOrderId = systemOrderId;
+            incomeDTO.Minutes = minutes;
             IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
             return incomeTranBl.SavePrice(incomeDTO);
         }
@@ -229,7 +230,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice2.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -256,7 +257,7 @@ namespace iFunGameStation
                     lblPrice2.Text = txtPrice2.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(2);//Game System Id - 2
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice2.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice2.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");
@@ -364,7 +365,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice3.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -391,7 +392,7 @@ namespace iFunGameStation
                     lblPrice3.Text = txtPrice3.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(3);//Game System Id - 2
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice3.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice3.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");
@@ -470,7 +471,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice4.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -497,7 +498,7 @@ namespace iFunGameStation
                     lblPrice4.Text = txtPrice4.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(4);//Game System Id - 4
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice4.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice4.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");
@@ -575,7 +576,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice5.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -602,7 +603,7 @@ namespace iFunGameStation
                     lblPrice5.Text = txtPrice5.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(5);//Game System Id - 5
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice5.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice5.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");
@@ -681,7 +682,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice6.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -708,7 +709,7 @@ namespace iFunGameStation
                     lblPrice6.Text = txtPrice6.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(6);//Game System Id - 6
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice6.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice6.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");
@@ -787,7 +788,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice7.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -814,7 +815,7 @@ namespace iFunGameStation
                     lblPrice7.Text = txtPrice7.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(7);//Game System Id - 7
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice7.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice7.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");
@@ -893,7 +894,7 @@ namespace iFunGameStation
                     if (dialogResult == DialogResult.Yes)
                     {
                         lblPrice8.Text = incomeTran.FinalPrice.ToString();
-                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId);
+                        var flag = SavePrice(incomeTran.Game_SystemID, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, incomeTran.FinalPrice, systemOrderId, minutes);
                         if (flag)
                         {
                             MessageBox.Show("Price Saved!!!");
@@ -920,7 +921,7 @@ namespace iFunGameStation
                     lblPrice8.Text = txtPrice8.Text;
                     IncomeTransactionBL incomeTranBl = new IncomeTransactionBL();
                     var gameSystemId = incomeTranBl.GetGameSystemId(8);//Game System Id - 8
-                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice8.Text), systemOrderId);
+                    var flag = SavePrice(gameSystemId, selectedPlayerNo, isIndividualflag, isManualFlag, manualPrice, manualComments, Convert.ToInt32(txtPrice8.Text), systemOrderId, minutes);
                     if (flag)
                     {
                         MessageBox.Show("Price Saved!!!");

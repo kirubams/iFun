@@ -89,6 +89,7 @@ namespace iFun.BusinessLayer
                 obj.CreatedDate = System.DateTime.Now;
                 obj.Createdby = 1;
                 obj.FinalPrice = incomeTranDTO.FinalPrice;
+                obj.Minutes = incomeTranDTO.Minutes;
                 obj.SystemOrderId = incomeTranDTO.SystemOrderId;
 
                 using (var entities = new iFunEntities())

@@ -10,7 +10,7 @@ BEGIN
 
 	SET NOCOUNT ON;
 	
-	  Select it.NoofPlayers, it.isManual, it.ManualPrice, it.ReasonForManualPrice, it.CreatedDate, it.FinalPrice, it.Game_SystemID, gs.Description,it.SystemOrderId  from dbo.IncomeTransaction it
+	  Select it.NoofPlayers, it.isManual, it.ManualPrice, it.ReasonForManualPrice, it.CreatedDate, it.FinalPrice, it.Game_SystemID, gs.Description,it.SystemOrderId, it.Minutes  from dbo.IncomeTransaction it
 		inner join dbo.Gamesystems gs on it.Game_SystemID = gs.GameSystemID
 		  Where Convert(date,it.CreatedDate) = Convert(date,@ReportDate)
 
